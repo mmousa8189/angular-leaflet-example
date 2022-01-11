@@ -46,11 +46,19 @@ export class MapComponent implements OnInit, AfterViewInit {
     //   this.egyptshape = egyptshape;
     //   this.initEgyptShapeLayer();
     // });
-    this.shapeService.getEgyptStatesShape().subscribe((egyptStatesShape) => {
-      // TODO: handle this to be option layer.
-      this.egyptStates = egyptStatesShape;
-      this.initEgyptStatesShapeLayer();
-    });
+    // this.shapeService.getEgyptStatesShape().subscribe((egyptStatesShape) => {
+    //   // TODO: handle this to be option layer.
+    //   this.egyptStates = egyptStatesShape;
+    //   this.initEgyptStatesShapeLayer();
+    // });
+
+    this.shapeService
+      .getEgyptStatesMarakzShape()
+      .subscribe((egyptStatesShape) => {
+        // TODO: handle this to be option layer.
+        this.egyptStates = egyptStatesShape;
+        this.initEgyptStatesMarakzShapeLayer();
+      });
   }
 
   private initMap(): void {
@@ -71,6 +79,22 @@ export class MapComponent implements OnInit, AfterViewInit {
     tiles.addTo(this.map);
   }
 
+  private initEgyptStatesMarakzShapeLayer() {
+    const egyptLayer = L.geoJSON(this.egyptStates, {
+      style: (feature) => ({
+        weight: 3,
+        opacity: 0.5,
+        color: '#008f68',
+        fillOpacity: 0.8,
+        fillColor: '#6DB65B',
+      }),
+      onEachFeature: (feature, layer) =>
+        this.onEachFeatureAction(feature, layer),
+    });
+
+    this.map.addLayer(egyptLayer);
+    egyptLayer.bringToBack();
+  }
   private initEgyptStatesShapeLayer() {
     const egyptLayer = L.geoJSON(this.egyptStates, {
       style: (feature) => ({
@@ -140,8 +164,9 @@ export class MapComponent implements OnInit, AfterViewInit {
       mouseover: (e: any) => this.highlightFeature(e),
       mouseout: (e: any) => this.resetFeature(e),
     });
+    //layer.bindPopup( this.popupService.makeEgyptStatesShapePopup(feature.properties) );
     layer.bindPopup(
-      this.popupService.makeEgyptStatesShapePopup(feature.properties)
+      this.popupService.makeEgyptStatesMarakzShapePopup(feature.properties)
     );
   }
 }

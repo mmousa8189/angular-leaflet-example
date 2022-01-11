@@ -5,6 +5,15 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ShapeService {
+  // egy_admbnda_adm0_capmas_itos_20170421.geojson => for egypt boundaries
+  private egyptBoundaries =
+    '/assets/data/egy_admbnda_adm0_capmas_itos_20170421.geojson';
+  // egy_admbnda_adm1_capmas_20170421.geojson => for egypt states boundaries
+  private egyptStatesBoundaries =
+    '/assets/data/egy_admbnda_adm1_capmas_20170421.geojson';
+  // egy_admbnda_adm1_capmas_20170421.geojson => for egypt states maraks boundaries
+  private egyptMarakzBoundaries =
+    '/assets/data/egy_admbnda_adm2_capmas_20170421.geojson';
   constructor(private http: HttpClient) {}
 
   getStateShapes() {
@@ -12,15 +21,12 @@ export class ShapeService {
   }
 
   getEgyptShape() {
-    // egy_admbnda_adm0_capmas_itos_20170421.geojson => for egypt boundaries
-    return this.http.get(
-      '/assets/data/egy_admbnda_adm0_capmas_itos_20170421.geojson'
-    );
+    return this.http.get(this.egyptBoundaries);
   }
   getEgyptStatesShape() {
-    // egy_admbnda_adm1_capmas_20170421.geojson => for egypt states boundaries
-    return this.http.get(
-      '/assets/data/egy_admbnda_adm1_capmas_20170421.geojson'
-    );
+    return this.http.get(this.egyptStatesBoundaries);
+  }
+  getEgyptStatesMarakzShape() {
+    return this.http.get(this.egyptMarakzBoundaries);
   }
 }
