@@ -26,7 +26,7 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class MapComponent implements OnInit, AfterViewInit {
   private map: any;
-  private states: any;
+  private egyptStates: any;
   private egyptshape: any;
 
   constructor(
@@ -41,10 +41,15 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.initMap();
     //this.markerService.makeCapitalMarkers(this.map);
     //this.markerService.makeCapitalCircleMarkers(this.map);
-    this.shapeService.getEgyptShape().subscribe((egyptshape) => {
+    // this.shapeService.getEgyptShape().subscribe((egyptshape) => {
+    //   // TODO: handle this to be option layer.
+    //   this.egyptshape = egyptshape;
+    //   this.initEgyptShapeLayer();
+    // });
+    this.shapeService.getEgyptStatesShape().subscribe((egyptStatesShape) => {
       // TODO: handle this to be option layer.
-      this.egyptshape = egyptshape;
-      this.initEgyptShapeLayer();
+      this.egyptStates = egyptStatesShape;
+      this.initEgyptStatesShapeLayer();
     });
   }
 
@@ -66,6 +71,22 @@ export class MapComponent implements OnInit, AfterViewInit {
     tiles.addTo(this.map);
   }
 
+  private initEgyptStatesShapeLayer() {
+    const egyptLayer = L.geoJSON(this.egyptStates, {
+      style: (feature) => ({
+        weight: 3,
+        opacity: 0.5,
+        color: '#008f68',
+        fillOpacity: 0.8,
+        fillColor: '#6DB65B',
+      }),
+      onEachFeature: (feature, layer) =>
+        this.onEachFeatureAction(feature, layer),
+    });
+
+    this.map.addLayer(egyptLayer);
+    egyptLayer.bringToBack();
+  }
   private initEgyptShapeLayer() {
     const egyptLayer = L.geoJSON(this.egyptshape, {
       style: (feature) => ({
@@ -113,5 +134,14 @@ export class MapComponent implements OnInit, AfterViewInit {
       fillOpacity: 0.8,
       fillColor: '#6DB65B',
     });
+  }
+  private onEachFeatureAction(feature: any, layer: any) {
+    layer.on({
+      mouseover: (e: any) => this.highlightFeature(e),
+      mouseout: (e: any) => this.resetFeature(e),
+    });
+    layer.bindPopup(
+      this.popupService.makeEgyptStatesShapePopup(feature.properties)
+    );
   }
 }

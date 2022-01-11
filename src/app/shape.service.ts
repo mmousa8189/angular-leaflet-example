@@ -17,4 +17,10 @@ export class ShapeService {
       '/assets/data/egy_admbnda_adm0_capmas_itos_20170421.geojson'
     );
   }
+  getEgyptStatesShape() {
+    // egy_admbnda_adm1_capmas_20170421.geojson => for egypt states boundaries
+    return this.http.get(
+      '/assets/data/egy_admbnda_adm1_capmas_20170421.geojson'
+    );
+  }
 }
