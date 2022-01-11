@@ -1,5 +1,22 @@
-<div class="map-container">
+<div class="row">
+<div class="col-xs-4 col-sm-4 col-lg-4" style="margin-left: 30px;">
+<form [formGroup]="form">
+
+  <div class="form-group">
+    <label for="layers">Select Layer</label>
+    <select class="form-control" id="layers" formControlName="layers" >
+      <option *ngFor="let layer of layers" [value]="layer.key">{{layer.name}}</option>
+    </select>
+  </div>
+
+
+</form>
+   </div>
+</div>
+<div class="row">
+      <div class="map-container">
     <div class="map-frame">
       <div id="map"></div>
     </div>
   </div>
+</div>
