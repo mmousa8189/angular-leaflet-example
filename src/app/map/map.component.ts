@@ -52,12 +52,19 @@ export class MapComponent implements OnInit, AfterViewInit {
     //   this.initEgyptStatesShapeLayer();
     // });
 
+    // this.shapeService
+    //   .getEgyptStatesMarakzShape()
+    //   .subscribe((egyptStatesShape) => {
+    //     // TODO: handle this to be option layer.
+    //     this.egyptStates = egyptStatesShape;
+    //     this.initEgyptStatesMarakzShapeLayer();
+    //   });
     this.shapeService
-      .getEgyptStatesMarakzShape()
+      .getEgyptStatesCitiesShape()
       .subscribe((egyptStatesShape) => {
         // TODO: handle this to be option layer.
         this.egyptStates = egyptStatesShape;
-        this.initEgyptStatesMarakzShapeLayer();
+        this.initEgyptStatesCitiesShapeLayer();
       });
   }
 
@@ -78,7 +85,22 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     tiles.addTo(this.map);
   }
+  private initEgyptStatesCitiesShapeLayer() {
+    const egyptLayer = L.geoJSON(this.egyptStates, {
+      style: (feature) => ({
+        weight: 3,
+        opacity: 0.5,
+        color: '#008f68',
+        fillOpacity: 0.8,
+        fillColor: '#6DB65B',
+      }),
+      onEachFeature: (feature, layer) =>
+        this.onEachFeatureAction(feature, layer),
+    });
 
+    this.map.addLayer(egyptLayer);
+    egyptLayer.bringToBack();
+  }
   private initEgyptStatesMarakzShapeLayer() {
     const egyptLayer = L.geoJSON(this.egyptStates, {
       style: (feature) => ({
@@ -165,8 +187,9 @@ export class MapComponent implements OnInit, AfterViewInit {
       mouseout: (e: any) => this.resetFeature(e),
     });
     //layer.bindPopup( this.popupService.makeEgyptStatesShapePopup(feature.properties) );
+    // layer.bindPopup( this.popupService.makeEgyptStatesMarakzShapePopup(feature.properties) );
     layer.bindPopup(
-      this.popupService.makeEgyptStatesMarakzShapePopup(feature.properties)
+      this.popupService.makeEgyptStatesCitiesShapePopup(feature.properties)
     );
   }
 }

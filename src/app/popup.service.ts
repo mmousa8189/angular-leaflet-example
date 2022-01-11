@@ -244,4 +244,104 @@ export class PopupService {
 </table> </div>`
     );
   }
+
+  makeEgyptStatesCitiesShapePopup(data: any): string {
+    return (
+      '' +
+      `<h2> ${data.ADM2_EN} - ${data.ADM2_AR}</h2>  ` +
+      `<div class="table-wrapper"><table>
+  <tr>
+    <th>Property</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>ADM3_EN</td>
+    <td>${data.ADM3_EN}</td>
+  </tr>
+  <tr>
+    <td>ADM3_AR</td>
+    <td>${data.ADM3_AR}</td>
+  </tr>
+  <tr>
+    <td>ADM3_PCODE</td>
+    <td>${data.ADM3_PCODE}</td>
+  </tr>
+  <tr>
+  <td>ADM3_REF</td>
+    <td>${data.ADM3_REF}</td>
+  </tr>
+   <tr>
+  <td>ADM3ALT1EN</td>
+    <td>${data.ADM3ALT1EN}</td>
+  </tr>
+   <tr>
+  <td>ADM3ALT2EN</td>
+    <td>${data.ADM3ALT2EN}</td>
+  </tr>
+   <tr>
+  <td>ADM3ALT1AR</td>
+    <td>${data.ADM3ALT1AR}</td>
+  </tr>
+   <tr>
+  <td>ADM3ALT2AR</td>
+    <td>${data.ADM3ALT2AR}</td>
+  </tr>
+   <tr>
+  <td>ADM2_EN</td>
+    <td>${data.ADM2_EN}</td>
+  </tr>
+   <tr>
+  <td>ADM2_AR</td>
+    <td>${data.ADM2_AR}</td>
+  </tr>
+   <tr>
+  <td>ADM2_PCODE</td>
+    <td>${data.ADM2_PCODE}</td>
+  </tr>
+ <td>ADM1_EN</td>
+    <td>${data.ADM1_EN}</td>
+  </tr>
+   <tr>
+  <td>ADM1_AR</td>
+    <td>${data.ADM1_AR}</td>
+  </tr>
+   <tr>
+  <td>ADM1_PCODE</td>
+    <td>${data.ADM1_PCODE}</td>
+  </tr>
+    <tr>
+  <td>ADM0_EN</td>
+    <td>${data.ADM0_EN}</td>
+  </tr>
+    <tr>
+  <td>ADM0_AR</td>
+    <td>${data.ADM0_AR}</td>
+  </tr>
+    <tr>
+  <td>ADM0_PCODE</td>
+    <td>${data.ADM0_PCODE}</td>
+  </tr>
+   <tr>
+ <td>Shape_Area</td>
+    <td>${data.Shape_Area}</td>
+  </tr>
+   <tr>
+  <td>Shape_Leng</td>
+    <td>${data.Shape_Leng}</td>
+  </tr>
+   <tr>
+  <td>date</td>
+    <td>${data.date}</td>
+  </tr>
+   <tr>
+  <td>validOn</td>
+    <td>${data.validOn}</td>
+  </tr>
+   <tr>
+  <td>validTo</td>
+    <td>${data.validTo}</td>
+  </tr>
+</table> </div>`
+    );
+  }
 }

@@ -14,6 +14,9 @@ export class ShapeService {
   // egy_admbnda_adm1_capmas_20170421.geojson => for egypt states maraks boundaries
   private egyptMarakzBoundaries =
     '/assets/data/egy_admbnda_adm2_capmas_20170421.geojson';
+  // egy_admbnda_adm1_capmas_20170421.geojson => for egypt states Cities boundaries
+  private egyptCitiesBoundaries =
+    '/assets/data/egy_admbnda_adm3_capmas_20170421.geojson';
   constructor(private http: HttpClient) {}
 
   getStateShapes() {
@@ -28,5 +31,8 @@ export class ShapeService {
   }
   getEgyptStatesMarakzShape() {
     return this.http.get(this.egyptMarakzBoundaries);
+  }
+  getEgyptStatesCitiesShape() {
+    return this.http.get(this.egyptCitiesBoundaries);
   }
 }
