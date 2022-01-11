@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import { MarkerService } from '../marker.service';
+import { PopupService } from '../popup.service';
 import { ShapeService } from '../shape.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -30,7 +31,8 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   constructor(
     private markerService: MarkerService,
-    private shapeService: ShapeService
+    private shapeService: ShapeService,
+    private popupService: PopupService
   ) {}
 
   ngOnInit(): void {}
@@ -40,15 +42,15 @@ export class MapComponent implements OnInit, AfterViewInit {
     //this.markerService.makeCapitalMarkers(this.map);
     //this.markerService.makeCapitalCircleMarkers(this.map);
     this.shapeService.getEgyptShape().subscribe((egyptshape) => {
-      // this.states = egyptshape;
+      // TODO: handle this to be option layer.
       this.egyptshape = egyptshape;
-      this.initStatesLayer();
+      this.initEgyptShapeLayer();
     });
   }
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [28.26405, 29.26755],
+      center: [30.033333, 31.233334],
       zoom: 6.4,
     });
     const tiles = L.tileLayer(
@@ -64,8 +66,8 @@ export class MapComponent implements OnInit, AfterViewInit {
     tiles.addTo(this.map);
   }
 
-  private initStatesLayer() {
-    const stateLayer = L.geoJSON(this.egyptshape, {
+  private initEgyptShapeLayer() {
+    const egyptLayer = L.geoJSON(this.egyptshape, {
       style: (feature) => ({
         weight: 3,
         opacity: 0.5,
@@ -80,8 +82,13 @@ export class MapComponent implements OnInit, AfterViewInit {
       //   }),
     });
 
-    this.map.addLayer(stateLayer);
-    stateLayer.bringToBack();
+    this.map.addLayer(egyptLayer);
+    egyptLayer.bindPopup(
+      this.popupService.makeEgyptShapePopup(
+        this.egyptshape.features[0].properties
+      )
+    );
+    egyptLayer.bringToBack();
   }
 
   private highlightFeature(e: any) {
