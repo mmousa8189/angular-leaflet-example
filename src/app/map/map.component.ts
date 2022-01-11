@@ -39,13 +39,13 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
-    //this.markerService.makeCapitalMarkers(this.map);
+    //this.markerService.makeMarkers(this.map);
     //this.markerService.makeCapitalCircleMarkers(this.map);
-    // this.shapeService.getEgyptShape().subscribe((egyptshape) => {
-    //   // TODO: handle this to be option layer.
-    //   this.egyptshape = egyptshape;
-    //   this.initEgyptShapeLayer();
-    // });
+    this.shapeService.getEgyptShape().subscribe((egyptshape) => {
+      // TODO: handle this to be option layer.
+      this.egyptshape = egyptshape;
+      this.initEgyptShapeLayer();
+    });
     // this.shapeService.getEgyptStatesShape().subscribe((egyptStatesShape) => {
     //   // TODO: handle this to be option layer.
     //   this.egyptStates = egyptStatesShape;
@@ -59,13 +59,20 @@ export class MapComponent implements OnInit, AfterViewInit {
     //     this.egyptStates = egyptStatesShape;
     //     this.initEgyptStatesMarakzShapeLayer();
     //   });
-    this.shapeService
-      .getEgyptStatesCitiesShape()
-      .subscribe((egyptStatesShape) => {
-        // TODO: handle this to be option layer.
-        this.egyptStates = egyptStatesShape;
-        this.initEgyptStatesCitiesShapeLayer();
-      });
+    // this.shapeService
+    //   .getEgyptStatesCitiesShape()
+    //   .subscribe((egyptStatesShape) => {
+    //     // TODO: handle this to be option layer.
+    //     this.egyptStates = egyptStatesShape;
+    //     this.initEgyptStatesCitiesShapeLayer();
+    //   });
+    // this.shapeService
+    //   .getEgyptPlacesPins()
+    //   .subscribe((egyptStatesShape) => {
+    //     // TODO: handle this to be option layer.
+    //     this.egyptStates = egyptStatesShape;
+    //     this.initEgyptStatesCitiesShapeLayer();
+    //   });
   }
 
   private initMap(): void {

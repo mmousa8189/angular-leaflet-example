@@ -14,6 +14,23 @@ export class PopupService {
       `<div>Population: ${data.population}</div>`
     );
   }
+  makePopup(data: any): string {
+    return (
+      `` +
+      `<div>ADM0_EN: ${data.ADM0_EN}</div>` +
+      `<div>ADM0_AR: ${data.ADM0_AR}</div>` +
+      `<div>ADM0_PCODE: ${data.ADM0_PCODE}</div>` +
+      `<div>ADM1_EN: ${data.ADM1_EN}</div>` +
+      `<div>ADM1_AR: ${data.ADM1_AR}</div>` +
+      `<div>ADM1_PCODE: ${data.ADM1_PCODE}</div>` +
+      `<div>ADM2_EN: ${data.ADM2_EN}</div>` +
+      `<div>ADM2_AR: ${data.ADM2_AR}</div>` +
+      `<div>ADM2_PCODE: ${data.ADM2_PCODE}</div>` +
+      `<div>ADM3_EN: ${data.ADM3_EN}</div>` +
+      `<div>ADM3_AR: ${data.ADM3_AR}</div>` +
+      `<div>ADM3_PCODE: ${data.ADM3_PCODE}</div>`
+    );
+  }
 
   makeEgyptShapePopup(data: any): string {
     return (
