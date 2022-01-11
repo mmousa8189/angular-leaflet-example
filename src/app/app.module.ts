@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MarkerService } from './marker.service';
 import { PopupService } from './popup.service';
 import { ShapeService } from './shape.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ShapeService } from './shape.service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [MarkerService,PopupService,ShapeService],
   bootstrap: [AppComponent]

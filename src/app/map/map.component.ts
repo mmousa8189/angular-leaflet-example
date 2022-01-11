@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 import { MarkerService } from '../marker.service';
 import { PopupService } from '../popup.service';
@@ -24,8 +24,8 @@ L.Marker.prototype.options.icon = iconDefault;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css'],
 })
-export class MapComponent implements OnInit, AfterViewInit {
-  private map: any;
+export class MapComponent implements OnInit, AfterViewInit, OnDestroy {
+  private map: L.Map | undefined;
   private egyptStates: any;
   private egyptshape: any;
 
@@ -36,7 +36,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {}
-
+  ngOnDestroy(): void {
+    this.map?.remove();
+  }
   ngAfterViewInit(): void {
     this.initMap();
     //this.markerService.makeMarkers(this.map);
@@ -86,7 +88,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         maxZoom: 18,
         minZoom: 3,
         attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          'efinance.com.eg  © Angular LeafLet &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }
     );
 
@@ -105,7 +107,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.onEachFeatureAction(feature, layer),
     });
 
-    this.map.addLayer(egyptLayer);
+    this.map?.addLayer(egyptLayer);
     egyptLayer.bringToBack();
   }
   private initEgyptStatesMarakzShapeLayer() {
@@ -121,7 +123,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.onEachFeatureAction(feature, layer),
     });
 
-    this.map.addLayer(egyptLayer);
+    this.map?.addLayer(egyptLayer);
     egyptLayer.bringToBack();
   }
   private initEgyptStatesShapeLayer() {
@@ -137,7 +139,7 @@ export class MapComponent implements OnInit, AfterViewInit {
         this.onEachFeatureAction(feature, layer),
     });
 
-    this.map.addLayer(egyptLayer);
+    this.map?.addLayer(egyptLayer);
     egyptLayer.bringToBack();
   }
   private initEgyptShapeLayer() {
@@ -156,7 +158,7 @@ export class MapComponent implements OnInit, AfterViewInit {
       //   }),
     });
 
-    this.map.addLayer(egyptLayer);
+    this.map?.addLayer(egyptLayer);
     egyptLayer.bindPopup(
       this.popupService.makeEgyptShapePopup(
         this.egyptshape.features[0].properties
