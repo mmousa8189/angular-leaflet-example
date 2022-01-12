@@ -8,17 +8,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { MarkerService } from './marker.service';
 import { PopupService } from './popup.service';
 import { ShapeService } from './shape.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MapComponent
-  ],
+  declarations: [AppComponent, MapComponent],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
   ],
-  providers: [MarkerService,PopupService,ShapeService],
-  bootstrap: [AppComponent]
+  providers: [MarkerService, PopupService, ShapeService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
