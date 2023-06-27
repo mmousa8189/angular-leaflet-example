@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import * as L from 'leaflet';
 import { MarkerService } from '../marker.service';
 import { PopupService } from '../popup.service';
