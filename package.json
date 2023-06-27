@@ -10,7 +10,16 @@
     "build:prod": "ng build --configuration production --base-href https://mmousa8189.github.io/angular-leaflet-example/",
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless"
   },
-  "private": true,
+  "private": false,
+  "author": {
+    "email": "mohamedamousa00@gmail.com",
+    "name": "Mohamed Mousa",
+    "url": "https://mohamedmousa.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mmousa8189/angular-leaflet-example"
+  },
   "dependencies": {
     "@angular/animations": "~13.0.0",
     "@angular/common": "~13.0.0",
